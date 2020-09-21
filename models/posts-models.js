@@ -1,4 +1,4 @@
-const db = ('../data/dbConfig')
+const db = require('../data/dbConfig')
 
 module.exports = {
 add,
@@ -12,8 +12,8 @@ async function add(addedObject) {
     return addedObject
 }
 
-async function get(post) {
-    return await db('posts').where(post)
+ function get() {
+    return  db('posts')
 }
 async function getById(post_id){
     const id = await db('posts').where({post_id})

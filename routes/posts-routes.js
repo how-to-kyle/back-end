@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Posts = require('../models/posts-models')
+const {requireToken} = require('../middleware/authentication')
 
-router.post("/", (req, res) => {
+router.post("/",  (req, res) => {
     Posts.add(req.body)
     .then(response => {res.status(201).json(response)})
     .catch((error)=> {
@@ -10,7 +11,7 @@ router.post("/", (req, res) => {
     })
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id",requireToken, (req, res) => {
     const id = Number(req.params.id)
     Posts.update(id, req.body)
     .then(response=>{
@@ -22,7 +23,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
-router.delete("/id", (req, res)=>{
+router.delete("/:id",requireToken, (req, res)=>{
     const id = Number(req.params.id)
     Posts.remove(id, req.body)
     .then(response=> {
@@ -36,6 +37,7 @@ router.delete("/id", (req, res)=>{
 router.get("/", (req,res) => {
     Posts.get()
     .then((posts) => {
+        console.log(posts)
         res.status(200).json(posts)
     })
     .catch((error)=> {
