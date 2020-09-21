@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const UsersRouter = require('../routes/user-routes');
+const PostsRouter = require('../routes/posts-routes');
 
 const server = express();
 
@@ -12,7 +13,7 @@ server.use(helmet());
 server.use(morgan('dev'));
 
 server.use('/api/users', UsersRouter);
-
+server.use('/api/posts', PostsRouter);
 server.use('/', (req, res) => {
   res.json({ message: 'API up and running...' });
 });
