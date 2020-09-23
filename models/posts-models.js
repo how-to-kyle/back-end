@@ -15,9 +15,9 @@ async function add(addedObject) {
  function get() {
     return  db('posts')
 }
-async function getById(post_id){
-    const id = await db('posts').where({post_id})
-    return id
+  function getById(id){
+    return db('posts').where(id)
+    
 }
 
 async function update(changes, id){

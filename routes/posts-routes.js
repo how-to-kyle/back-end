@@ -47,8 +47,15 @@ router.get("/", (req,res) => {
     })
 })
 router.get("/:id", (req, res)=> {
-    Posts.getById(Number(req.posts.id))
+    const {id} = req.params
+    Posts.getById({id})
+    .then((posts)=>{
     res.status(200).json(posts)
+   
+   
+ }).catch((error)=>{
+     res.status(500).json({message: error.message})
+ })
 })
 
 

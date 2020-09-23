@@ -11,13 +11,7 @@ exports.up = async function (knex) {
       posts
         .string('title', 255)
         .notNullable()
-      posts.integer('user_post_id') 
-        .unsigned()
-        .notNullable()
-        .references('id')
-        .inTable('users')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE');
+     
   })
  
   };
