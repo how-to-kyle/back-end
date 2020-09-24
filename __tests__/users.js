@@ -15,13 +15,13 @@ describe('User Integration Tests', () => {
     // grab a token from a valid login request
     // and send a get request using that auth token
     beforeAll(async () => {
-      await db.seed.run();
+      // await db.seed.run();
 
       const loginUser = await request(server)
         .post('/api/users/login')
         .send({ email: 'test@test.com', password: 'password123' });
 
-      const token = loginUser.body.token;
+      const token = loginUser.res.data.token;
 
       response = await request(server)
         .get('/api/users')
